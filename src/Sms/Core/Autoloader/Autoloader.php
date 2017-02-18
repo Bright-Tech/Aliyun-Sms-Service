@@ -17,7 +17,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-spl_autoload_register("Autoloader::autoload");
+//spl_autoload_register("Autoloader::autoload");
 class Autoloader
 {
 	private static $autoloadPathArray = array(

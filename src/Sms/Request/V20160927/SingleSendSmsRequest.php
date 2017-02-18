@@ -18,8 +18,8 @@
  * under the License.
  */
 namespace Sms\Request\V20160927;
-
-class SingleSendSmsRequest extends \RpcAcsRequest
+use Sms\Core\RpcAcsRequest;
+class SingleSendSmsRequest extends RpcAcsRequest
 {
 	function  __construct()
 	{

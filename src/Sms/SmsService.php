@@ -31,11 +31,7 @@ class SmsService
      */
     protected $sms_region;
 
-
-    /**短信签名
-     * @var
-     */
-    protected $sigh_name;
+    
 
 
     /**
@@ -65,25 +61,26 @@ class SmsService
         $this->sms_region = env('ALIYUN_MTS_REGION', 'cn-shanghai');
         $this->access_key_id = env('ALIYUN_OSS_ACCESS_ID');
         $this->access_key_secret = env('ALIYUN_OSS_ACCESS_KEY');
-        $this->sigh_name = env('ALIYUN_SMS_SIGH_NAME');
         $this->template_code = env('ALIYUN_SMS_TEMPLATE_CODE');
 
 
         //初始化Client
-        $this->profile = Core\DefaultProfile::getProfile($this->mts_region, $this->access_key_id, $this->access_key_secret);
+        $this->profile = Core\DefaultProfile::getProfile($this->sms_region, $this->access_key_id, $this->access_key_secret);
         $this->client = new Core\DefaultAcsClient($this->profile);
     }
 
 
     public function send($rec_num , $params)
     {
+        $code = $params['code'].'';
+        $time = $params['time'].'';
+        $sigh_name = $params['sigh_name'].'';
         $request = new Sms\SingleSendSmsRequest();
-        $request->setSignName($this->sigh_name);/*签名名称*/
+        $request->setSignName($sigh_name);/*签名名称*/
         $request->setTemplateCode($this->template_code);/*模板code*/
         $request->setRecNum($rec_num);/*目标手机号*/
-        foreach ($params as $key => $param){
-            $request->setParamString("{\"$key\":\"$param\"}");/*模板变量，数字一定要转换为字符串*/
-        }
+        $request->setParamString("{\"code\":\"$code\",\"time\":\"$time\"}");/*模板变量，数字一定要转换为字符串*/
+
         try {
             $response = $this->client->getAcsResponse($request);
 
