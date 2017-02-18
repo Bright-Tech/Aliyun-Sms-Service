@@ -1,0 +1,20 @@
+{
+    "name": "bright-tech/aliyun-sms-service",
+    "description": "阿里云短信服务 ",
+    "type": "sdk",
+    "keywords": ["aliyun","sms","sdk","php"],
+    "license": "GNU GENERAL PUBLIC LICENSE",
+    "authors": [
+        {
+            "name": "dudashuang",
+            "email": "wang.wenchao@bright-tech.cn"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "5.*"
+    },
+    "autoload": {
+        "psr-4": {"Sms\\": "src/"}
+    }
+}
